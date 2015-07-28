@@ -77,5 +77,6 @@ RPROMPT="%{${fg[yellow]}%}[%~]%{${reset_color}%}"
 
 
 # aws-cliの補完設定。最後に書く必要があります
-source /usr/local/Cellar/awscli/1.7.34/libexec/bin/aws_zsh_completer.sh
+source /usr/local/opt/awscli/libexec/bin/aws_zsh_completer.sh
 # End of lines configured by zsh-newuser-installexport
+
