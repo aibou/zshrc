@@ -7,12 +7,12 @@ export PATH=$PATH:~/bin
 
 # rbenvの設定
 #export RBENV_ROOT=/usr/local/var/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 
 # aliasの設定
 alias ls="ls -G"
-alias npm="npm -g" # install for grobal
 alias emcas=emacs
+alias e=emacs
 alias be="bundle exec"
 
 # emacsキーバインド設定
@@ -42,8 +42,16 @@ setopt autocd
 # Ctrl-Dによるログアウト防止
 setopt IGNOREEOF
 
+setopt hist_ignore_dups
+
+# source-highlightによるless colorize
+if [ -f `which src-hilite-lesspipe.sh | awk '{print $1}'` ]; then
+    export LESS='-R'
+    export LESSOPEN='| src-hilite-lesspipe.sh %s'
+fi
+
 # Goの設定
-export GOVERSION=1.4.2
+export GOVERSION=1.5.2
 export GOPATH=~/.go/${GOVERSION}
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
