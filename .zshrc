@@ -5,15 +5,24 @@ SAVEHIST=10000
 # PATHの設定
 export PATH=$PATH:~/bin
 
+# EDITORの設定
+export EDITOR=emacs
+
 # rbenvの設定
-#export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+
+if which pyenv > /dev/null; then eval "$(pyenv init - zsh)"; fi
+
+if which nodenv > /dev/null; then eval "$(nodenv init - zsh)"; fi
+
 
 # aliasの設定
 alias ls="ls -G"
 alias emcas=emacs
 alias e=emacs
 alias be="bundle exec"
+alias tf="terraform"
+alias gpom="git pull origin master"
 
 # emacsキーバインド設定
 bindkey -e
@@ -51,10 +60,11 @@ if [ -f `which src-hilite-lesspipe.sh | awk '{print $1}'` ]; then
 fi
 
 # Goの設定
-export GOVERSION=1.5.2
+export GOVERSION=1.6.3
 export GOPATH=~/.go/${GOVERSION}
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+
 
 # git ps1の設定
 if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]
@@ -84,7 +94,8 @@ SPROMPT="%{${fg[white]}%}correct: %R -> %r[nyae]? %{${reset_color}%}"
 RPROMPT="%{${fg[yellow]}%}[%~]%{${reset_color}%}"
 
 
+MYSQL_PS1="${fg[yellow]}\u@\h:${reset_color} [\\d] \r:\m \P\n> "
+
 # aws-cliの補完設定。最後に書く必要があります
 source /usr/local/opt/awscli/libexec/bin/aws_zsh_completer.sh
 # End of lines configured by zsh-newuser-installexport
-
