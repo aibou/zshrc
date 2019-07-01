@@ -3,7 +3,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # PATHの設定
-export PATH=$PATH:~/bin:/usr/local/bin
+export PATH=~/bin:/usr/local/bin:$PATH
 
 # EDITORの設定
 export EDITOR=emacs
