@@ -3,7 +3,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # PATHの設定
-export PATH=~/bin:/usr/local/bin:$PATH
+export PATH=~/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # EDITORの設定
 export EDITOR=emacs
@@ -20,6 +20,7 @@ alias gpom="git pull origin master"
 bindkey -e
 
 # 補完機能の強化
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit
 
@@ -56,10 +57,11 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
 # git ps1の設定
-if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]
+if [ -f /opt/homebrew/opt/git/etc/bash_completion.d/git-prompt.sh ]
 then
-    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    source /opt/homebrew/opt/git/etc/bash_completion.d/git-prompt.sh
 fi
+
 
 setopt PROMPT_SUBST
 setopt TRANSIENT_RPROMPT
@@ -85,10 +87,11 @@ RPROMPT="%{${fg[yellow]}%}[%~]%{${reset_color}%}"
 MYSQL_PS1="${fg[yellow]}\u@\h:${reset_color} [\\d] \r:\m \P\n> "
 
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
-if which pyenv > /dev/null; then eval "$(pyenv init - zsh)"; fi
+if which pyenv > /dev/null; then eval "$(pyenv init - zsh)"; eval "$(pyenv init --path)"; fi
 if which nodenv > /dev/null; then eval "$(nodenv init - zsh)"; fi
 if which kubectl > /dev/null; then eval "$(kubectl completion zsh)"; fi
 if which helm > /dev/null; then eval "$(helm completion zsh)"; fi
+if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc ]
 then
@@ -97,5 +100,5 @@ then
 fi
 
 # aws-cliの補完設定。最後に書く必要があります
-source /usr/local/opt/awscli/libexec/bin/aws_zsh_completer.sh
+source /opt/homebrew/opt/awscli@2/libexec/bin/aws_zsh_completer.sh
 # End of lines configured by zsh-newuser-installexport
