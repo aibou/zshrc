@@ -15,6 +15,8 @@ alias e=emacs
 alias be="bundle exec"
 alias tf="terraform"
 alias gpom="git pull origin master"
+alias grep="/usr/bin/grep --exclude-dir=.terraform --exclude-dir=vendor --exclude-dir=node_modules"
+
 
 # emacsキーバインド設定
 bindkey -e
