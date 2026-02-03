@@ -11,11 +11,12 @@ export EDITOR=emacs
 # aliasの設定
 alias ls="ls -G"
 alias emcas=emacs
+alias emasc=emacs
 alias e=emacs
 alias be="bundle exec"
 alias tf="terraform"
 alias gpom="git pull origin master"
-alias grep="/usr/bin/grep --exclude-dir=.terraform --exclude-dir=vendor --exclude-dir=node_modules"
+alias grep="/usr/bin/grep --exclude-dir=.terraform --exclude-dir=vendor --exclude-dir=node_modules --exclude-dir=.kube"
 
 
 # emacsキーバインド設定
@@ -67,9 +68,7 @@ fi
 
 setopt PROMPT_SUBST
 setopt TRANSIENT_RPROMPT
-GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_DESCRIBE_STYLE="default"
 GIT_PS1_SHOWCOLORHINTS=1
@@ -90,10 +89,16 @@ MYSQL_PS1="${fg[yellow]}\u@\h:${reset_color} [\\d] \r:\m \P\n> "
 
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv init - zsh)"; eval "$(pyenv init --path)"; fi
+if which goenv > /dev/null; then eval "$(goenv init - zsh)"; fi
 if which nodenv > /dev/null; then eval "$(nodenv init - zsh)"; fi
 if which kubectl > /dev/null; then eval "$(kubectl completion zsh)"; fi
 if which helm > /dev/null; then eval "$(helm completion zsh)"; fi
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
+
+# GOで使ってるsopsの簡易値確認
+lessops() {
+  sops --decrypt "$@" | less
+}
 
 if [ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc ]
 then
@@ -102,5 +107,8 @@ then
 fi
 
 # aws-cliの補完設定。最後に書く必要があります
-source /opt/homebrew/opt/awscli@2/libexec/bin/aws_zsh_completer.sh
+if [ -f  /opt/homebrew/opt/awscli@2/libexec/bin/aws_zsh_completer.sh ]
+then
+    source /opt/homebrew/opt/awscli@2/libexec/bin/aws_zsh_completer.sh
+fi
 # End of lines configured by zsh-newuser-installexport
